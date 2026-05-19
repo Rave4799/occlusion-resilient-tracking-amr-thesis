@@ -1,9 +1,13 @@
 CLAUDE.md
 dataset/train/images/
-dataset/val/images/
-dataset/test/images/
 dataset/train/images_filtered/
 dataset/train/images_selected/
+dataset/val/images/
+dataset/test/images/
+dataset/train/labels/
+dataset/train/labels_split/
+dataset/val/labels/
+dataset/test/labels/
 weights/
 logs/
 __pycache__/
