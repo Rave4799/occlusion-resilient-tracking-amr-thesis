@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# phase1_extract_frames.py
+# extract_frames.py
 # Source ROS Noetic environment before running this script.
-# Example: source /opt/ros/noetic/setup.bash && python3 phase1_extract_frames.py
+# Example: source /opt/ros/noetic/setup.bash && python3 extract_frames.py
 
 import argparse  # import argparse to parse command line arguments
 import os  # import os to manipulate filesystem paths and directories
