@@ -1,0 +1,7 @@
+path: /home/rad4799/thesis_ws/dataset
+train: train/images
+val: val/images
+test: test/images
+nc: 1
+names:
+  0: person
