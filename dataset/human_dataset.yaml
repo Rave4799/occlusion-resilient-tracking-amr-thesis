@@ -1,7 +1,9 @@
-path: /home/rad4799/thesis_ws/dataset
-train: train/images
-val: val/images
-test: test/images
+images: /content/dataset/images
+labels: /content/dataset/labels
 nc: 1
 names:
   0: person
+stats:
+  total_labeled: 5773
+  train: 4618
+  val: 1155

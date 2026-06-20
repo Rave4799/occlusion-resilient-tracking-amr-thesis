@@ -1,0 +1,11 @@
+model:
+  backbone: resnet50_fpn
+  num_classes: 2
+training:
+  epochs: 10
+  batch_size: 4
+  lr: 0.005
+results:
+  epoch_1_loss: 0.1216
+  epoch_10_loss: 0.0508
+  best_model: gdrive://faster_rcnn_best.pth
