@@ -1,21 +1,19 @@
-"""Phase 3 - Faster R-CNN Training
-Loss: 0.1216->0.0508, 10 epochs, T4, 5773 images
+"""Phase 3 - Faster R-CNN Training. Loss: 0.1216->0.0508, 10 epochs, T4
 """
-import os, time, torch
-from torch.utils.data import DataLoader, random_split
-from dataset import HumanDataset, get_transform, collate_fn
+import os,time,torch
+from torch.utils.data import DataLoader,random_split
+from dataset import HumanDataset,get_transform,collate_fn
 from model import build_model
 
 IMG_DIR="/content/dataset/images"
 LBL_DIR="/content/dataset/labels"
 SAVE_BEST="/content/drive/MyDrive/faster_rcnn_best.pth"
 SAVE_FINAL="/content/drive/MyDrive/faster_rcnn_final.pth"
-NUM_EPOCHS=10
-BATCH_SIZE=4
-LR=0.005
+NUM_EPOCHS=10; BATCH_SIZE=4; LR=0.005
 
 dataset=HumanDataset(IMG_DIR,LBL_DIR,transforms=get_transform())
-n=len(dataset); train_ds,val_ds=random_split(dataset,[int(0.8*n),n-int(0.8*n)])
+n=len(dataset)
+train_ds,val_ds=random_split(dataset,[int(0.8*n),n-int(0.8*n)])
 train_loader=DataLoader(train_ds,batch_size=BATCH_SIZE,shuffle=True,num_workers=2,collate_fn=collate_fn)
 model,device=build_model(2)
 params=[p for p in model.parameters() if p.requires_grad]
