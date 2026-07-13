@@ -36,3 +36,21 @@ Topic: /camera/color/image_raw | Frame step: 3 | JPEG quality: 85
 | 7 | llm_semantic_layer/ | Done - Gemini-2.5-Flash, 13/73 LLM calls, BS-1/2/3 taxonomy |
 | 8 | evaluation/ | Pending - July (MOTA, IDF1, AbsRel, LLM quality metrics) |
 | 9 | ros2_integration/ | Pending - July (Jetson Orin, TensorRT, Ollama Gemma-2-2B) |
+
+## Phase 5b — Metric Depth Estimation & Safety Zones
+
+**Model:** DepthAnything-V2-Metric-Indoor-Small (HuggingFace)  
+**Calibration:** Scale-shift fit against RealSense D435 ground truth  
+- Scale s = 0.487, Shift t = 0.751 m, RMSE = 140.9 cm  
+
+**Safety Zones (ISO 3691-4 — Driverless Industrial Trucks):**  
+| Zone | Threshold | Action |
+|------|-----------|--------|
+| 🔴 CRITICAL | Z < 1.0 m | Emergency stop |
+| 🟠 WARNING  | 1.0 m ≤ Z < 3.0 m | Decelerate |
+| 🟢 SAFE     | Z ≥ 3.0 m | Normal operation |
+
+**Results on 300 frames (760 detections):**  
+- CRITICAL: 0 (0.0%)  
+- WARNING: 315 (41.4%)  
+- SAFE: 445 (58.6%)  
