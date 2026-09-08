@@ -2,7 +2,7 @@
 # with Adaptive Logging using an LLM Semantic Layer
 
 **Student:** Jupudi Ravichandra (315502) | M.Eng. Mechatronics, HS Schmalkalden
-**Supervisor:** Prof. Ing. Frank Schrodl | **Co-Supervisor:** Y. Strigina, M.Eng.
+**Supervisor:** Prof. Ing. Frank Schrödel | **Co-Supervisor:** Y. Strigina, M.Eng.
 **Deadline:** August 25, 2026
 
 ## The Problem
