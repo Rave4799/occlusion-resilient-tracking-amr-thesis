@@ -1,0 +1,21 @@
+# requirements.txt — pinned to the exact versions validated end-to-end
+# (Day 1-2 implementation, both demo clips run successfully through
+# run_pipeline.py on these exact versions, macOS/CPU).
+
+torch==2.13.0
+torchvision==0.28.0
+ultralytics==8.4.115        # YOLOv10n
+opencv-python==5.0.0.93
+numpy==2.3.5
+pyyaml==6.0.3
+transformers==5.14.1        # Depth Anything V2 via HF pipeline
+deep-sort-realtime==1.3.2
+google-generativeai==0.8.6  # Gemini API for LLM enrichment — NOTE: this
+                             # package is fully deprecated by Google as of
+                             # this writing, in favor of google-genai. It
+                             # still works (validated Sept 2026) but is not
+                             # receiving further updates. See README.
+pillow==12.0.0
+python-dotenv>=1.0          # loads GEMINI_API_KEY from .env — no hard
+                             # version requirement, this is a small stable
+                             # utility library

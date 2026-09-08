@@ -1,0 +1,54 @@
+# config.yaml — single source of truth for all paths and parameters.
+# No path or magic number should be hardcoded anywhere in src/. If a module
+# needs a path or a threshold, it comes from this file.
+
+paths:
+  base_dir: "."                          # overridden at runtime via BASE_DIR env var if set
+  input_video: "data/demo_clip.mp4"      # default demo input
+  models_dir: "models"
+  yolo_weights: "models/yolov10/best.pt"
+  frcnn_weights: "models/faster_rcnn/faster_rcnn_final.pth"
+  output_dir: "outputs"
+  log_dir: "outputs/logs"
+
+detection:
+  # CORRECTED to match the real validated notebook (Tracker_GT_Validation.ipynb)
+  # — this is the exact threshold used to produce the thesis's MOTA/IDF1 numbers.
+  yolo_conf_threshold: 0.15
+  frcnn_conf_threshold: 0.50
+  # dual-detector mode: both detectors run every frame, fused by IoU
+  # (see thesis §5.3/§5.4.2 for why this is a coverage-ceiling ablation,
+  # not the selective-trigger design of §4.2)
+  fusion_iou_threshold: 0.30
+
+tracking:
+  # DeepSORT + MobileNet Re-ID — CORRECTED to match the real validated
+  # notebook values (confirmed directly from Tracker_GT_Validation.ipynb).
+  max_age: 30
+  n_init: 3
+  max_cosine_distance: 0.4
+  nn_budget: 100
+
+depth:
+  model_name: "depth-anything/Depth-Anything-V2-Small-hf"
+  # spatial context bin thresholds — percentiles from thesis Table 6.6
+  # these are LOCKED values, do not retune without updating the thesis
+  p25_threshold: 1.06
+  p65_threshold: 3.61
+
+association:
+  # bbox-direct sampling (replaces the retired IoU-fusion verification gate)
+  # samples depth directly inside each confirmed track's own bounding box
+
+reasoning:
+  # BS-1 trigger: track stable >= n_stable frames, then lost >= n_lost frames,
+  # with last observed depth_bin == "near"
+  n_stable_frames: 10
+  n_lost_frames: 5
+  llm_enabled: true
+  llm_model: "gemini-2.5-flash"
+  llm_timeout_seconds: 15.0   # fallback to rule_template alone if exceeded
+
+runtime:
+  device: "cuda"   # falls back to "cpu" automatically if unavailable
+  log_level: "INFO"
